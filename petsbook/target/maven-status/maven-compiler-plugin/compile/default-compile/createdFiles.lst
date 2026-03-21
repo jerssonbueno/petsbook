@@ -1,0 +1,4 @@
+com\mycompany\petsbook\principal\Main.class
+com\mycompany\petsbook\conexion\ConexionBD.class
+com\mycompany\petsbook\modelo\Mascota.class
+com\mycompany\petsbook\dao\MascotaDAO.class
