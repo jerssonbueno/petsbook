@@ -11,7 +11,6 @@ import com.mycompany.petsbook_web.modelo.mascota;
 
 public class mascotaDAO {
 
-   
     public boolean guardar(mascota m) {
         boolean estado = false;
 
@@ -30,13 +29,12 @@ public class mascotaDAO {
             estado = true;
 
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
 
         return estado;
     }
 
-    
     public List<mascota> listar() {
         List<mascota> lista = new ArrayList<>();
 
@@ -62,5 +60,56 @@ public class mascotaDAO {
         }
 
         return lista;
+    }
+
+    public mascota buscarPorId(int id) {
+        mascota m = null;
+
+        try {
+            Connection con = conexion.conectar();
+
+            String sql = "SELECT * FROM mascota WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                m = new mascota();
+                m.setId(rs.getInt("id"));
+                m.setNombre(rs.getString("nombre"));
+                m.setEdad(rs.getInt("edad"));
+                m.setTipo(rs.getString("tipo"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return m;
+    }
+
+    public boolean actualizar(mascota m) {
+        boolean estado = false;
+
+        try {
+            Connection con = conexion.conectar();
+
+            String sql = "UPDATE mascota SET nombre=?, edad=?, tipo=? WHERE id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, m.getNombre());
+            ps.setInt(2, m.getEdad());
+            ps.setString(3, m.getTipo());
+            ps.setInt(4, m.getId());
+
+            ps.executeUpdate();
+            estado = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return estado;
     }
 }

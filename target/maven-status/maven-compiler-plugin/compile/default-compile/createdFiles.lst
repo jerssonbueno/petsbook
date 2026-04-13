@@ -1,6 +1,7 @@
 com\mycompany\petsbook_web\conexion\conexion.class
 com\mycompany\petsbook_web\servlet\mascotaServlet.class
 com\mycompany\petsbook_web\resources\JakartaEE10Resource.class
+com\mycompany\petsbook_web\service\mascotaService.class
 com\mycompany\petsbook_web\JakartaRestConfiguration.class
 com\mycompany\petsbook_web\dao\mascotaDAO.class
 com\mycompany\petsbook_web\modelo\mascota.class
