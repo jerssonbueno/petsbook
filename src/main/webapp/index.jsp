@@ -5,53 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro Mascota</title>
-
-   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<%
-String error = (String) request.getAttribute("error");
-if (error != null) {
-%>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        <strong>¡Atención!</strong> <%= error %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<body class="container mt-5">
+
+    <%
+    // Si el Servlet detecta un error (como edad negativa), muestra este aviso rojo
+    String error = (String) request.getAttribute("error");
+    if (error != null) {
+    %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>¡Atención!</strong> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <%
+    }
+    %>
+
+    <div class="card shadow-sm p-4">
+        <h2 class="mb-4">Registrar Nueva Mascota</h2>
+
+        <form action="MascotaServlet" method="post">
+
+            <div class="mb-3">
+                <label class="form-label">Nombre de la mascota:</label>
+                <input type="text" name="nombre" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Edad (en años):</label>
+                <input type="number" name="edad" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tipo (Perro, Gato, etc.):</label>
+                <input type="text" name="tipo" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar Mascota</button>
+            
+            <a href="MascotaServlet" class="btn btn-outline-primary ms-2">Ver lista</a>
+        </form>
     </div>
-<%
-}
-%>
 
-<h2>Registrar Mascota</h2>
-
-<!-- 
-    Formulario que envía los datos al Servlet llamado MascotaServlet
-    method="post" se usa para enviar datos de forma segura
--->
-<form action="MascotaServlet" method="post">
-
-    <!-- Campo para ingresar el nombre de la mascota -->
-    Nombre: <input type="text" name="nombre"required><br><br>
-
-    <!-- Campo para ingresar la edad de la mascota -->
-    Edad: <input type="number" name="edad"required><br><br>
-
-    <!-- Campo para ingresar el tipo de mascota (perro, gato, etc.) -->
-    Tipo: <input type="text" name="tipo"required><br><br>
-
-    <!-- Botón para enviar el formulario -->
-    <input type="submit" value="Guardar">
-</form>
-
-<br><br>
-
-<!-- 
-    Enlace que permite ir al Servlet para ver la lista de mascotas registradas 
--->
-<a href="MascotaServlet">Ver mascotas registradas</a>
-
-<!-- Script de Bootstrap para funcionalidades dinámicas -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
